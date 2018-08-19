@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import * as $ from 'jquery';
 
 const FIELDS = ['pros', 'cons', 'mehs', 'overview', 'notes']
 
@@ -36,8 +36,9 @@ $(function() {
     });
 
     FIELDS.forEach(function(field) {
-        if (!localStorage[field]) {
-            $(`#${field}`).html(localStorage[field]);
+        const value = localStorage.getItem(field);
+        if (value) {
+            $(`#${field}`).html(value);
         }
     });
 
