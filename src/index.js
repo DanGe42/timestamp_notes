@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const FIELDS = ['pros', 'cons', 'mehs', 'overview', 'notes']
 
 const SPECIAL_CHARACTERS = {
@@ -17,7 +19,7 @@ const PREFIXES = {
 $(function() {
     $('#notes-form').on('submit', function() {
         let noteText = $('#note-text').val();
-        if (noteText == undefined || noteText == '') {
+        if (!noteText) {
             return false;
         }
         takeNote(noteText);
@@ -34,12 +36,12 @@ $(function() {
     });
 
     FIELDS.forEach(function(field) {
-        if (localStorage[field] != undefined) {
+        if (!localStorage[field]) {
             $(`#${field}`).html(localStorage[field]);
         }
     });
 
-    if (localStorage.savedNotes != undefined) {
+    if (!localStorage.savedNotes) {
         $('#savedNotes').html(localStorage.savedNotes);
     }
 
