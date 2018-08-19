@@ -2,14 +2,22 @@ import * as $ from 'jquery';
 
 const FIELDS = ['pros', 'cons', 'mehs', 'overview', 'notes']
 
-const SPECIAL_CHARACTERS = {
+interface SpecialCharactersMap {
+    '+': string;
+    '-': string;
+    '~': string;
+    '=': string;
+    [key: string]: string;
+}
+
+const SPECIAL_CHARACTERS : SpecialCharactersMap = {
     '+': 'pros',
     '-': 'cons',
     '~': 'mehs',
     '=': 'overview',
 }
 
-const PREFIXES = {
+const PREFIXES : SpecialCharactersMap = {
     '+': '(+) ',
     '-': '(-) ',
     '~': '(~) ',
@@ -18,7 +26,7 @@ const PREFIXES = {
 
 $(function() {
     $('#notes-form').on('submit', function() {
-        let noteText = $('#note-text').val();
+        let noteText: string = $('#note-text').val() as string;
         if (!noteText) {
             return false;
         }
@@ -42,13 +50,14 @@ $(function() {
         }
     });
 
-    if (!localStorage.savedNotes) {
-        $('#savedNotes').html(localStorage.savedNotes);
+    const savedNotes = localStorage.getItem('savedNotes');
+    if (!savedNotes) {
+        $('#savedNotes').html(savedNotes);
     }
 
 });
 
-function takeNote(text) {
+function takeNote(text: string) {
     if(text[0] in SPECIAL_CHARACTERS) {
         record(SPECIAL_CHARACTERS[text[0]], text.substr(1), PREFIXES[text[0]]);
     } else {
@@ -56,11 +65,11 @@ function takeNote(text) {
     }
 }
 
-function record(field, text, prefix) {
+function record(field: string, text: string, prefix: string) {
     let note = "<li>" + prefix + text + "</li>";
     const elem = $(`#${field}`)
     elem.append(note);
-    localStorage[field] = elem.html();
+    localStorage.setItem(field, elem.html());
 }
 
 function getTimeStamp() {
@@ -76,7 +85,7 @@ function clearNotes() {
 
 function clearFields() {
     FIELDS.forEach(function(field) {
-        localStorage[field] = '';
+        localStorage.setItem(field, '');
         $(`#${field}`).html('');
     });
 }
@@ -84,12 +93,12 @@ function clearFields() {
 function saveNotes() {
   let name = prompt("Save as...");
   if (name != '') {
-    fields = "";
+    let fields = "";
     FIELDS.forEach(function(field) {
         fields += $(`#${field}`).html();
     });
-    note = "<strong>" + name + "</strong>" + fields + "</br>";
-    localStorage.savedNotes += note;
+    const note = "<strong>" + name + "</strong>" + fields + "</br>";
+    localStorage.setItem('savedNotes', localStorage.getItem('savedNotes') + note);
     $('#savedNotes').append(note);
 
     clearFields();
