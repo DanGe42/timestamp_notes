@@ -9,24 +9,19 @@
 		<script src='js/notes.js'></script>
 	</head>
 	<body>
-		<div class="container">
+		<div class="sane-container">
 			<div class="row">
-				<h1 class="col-lg-4 col-lg-offset-4 heading">Timestamp Notes</h1>
+				<h1 class="heading">Timestamp Notes</h1>
 			</div>
 			<div class="row">
-				<div class="col-xs-8 col-xs-offset-2">
-					<form id="notes-form">
-						<div class="form-group">
-							<input id='note-text' class="form-control" type="text" placeholder="Start with '+', '-', '~' for pros/cons/mehs, or '=' for overall summary."/>
-						</div>
-						<div class="pull-right">
-							<button type="submit" class="btn btn-primary">Take Note</button>
-						</div>
-					</form>
-				</div>
+				<form id="notes-form">
+					<div class="form-group">
+						<input id='note-text' class="form-control" type="text" placeholder="Start with '+', '-', '~' for pros/cons/mehs, or '=' for overall summary."/>
+					</div>
+				</form>
 			</div>
 			<div class="row">
-				<div class='well col-xs-8 col-xs-offset-2 top-padded'>
+				<div class='well top-padded'>
 					<ul class="unf-list" id='overview'></ul>
 					<ul class="unf-list" id='pros'></ul>
 					<ul class="unf-list" id='mehs'></ul>
@@ -35,20 +30,18 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-8 col-xs-offset-2">
-					<div class="pull-right">
-						<button id="saveBtn" class="btn btn-primary">Save Notes As...</button>
-						<button id="clearBtn" class="btn btn-danger">Clear Notes</button>
-					</div>
+				<div class="pull-right">
+					<button id="saveBtn" class="btn btn-primary">Save Notes As...</button>
+					<button id="clearBtn" class="btn btn-danger">Clear Notes</button>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-8 col-xs-offset-2 top-padded">
+				<div class="top-padded">
 					<h1>Saved Notes</h1>
 				</div>
 			</div>
 			<div class="row">
-				<div class='well col-xs-8 col-xs-offset-2 top-padded'>
+				<div class='well top-padded'>
 					<ul class="unf-list" id='savedNotes'></ul>
 				</div>
 			</div>

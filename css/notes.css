@@ -10,3 +10,18 @@
 .top-padded {
 	margin-top: 15px;
 }
+
+.sane-container {
+	max-width: 780px;
+	padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media only screen and (max-width: 779px) {
+	.sane-container {
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+}
