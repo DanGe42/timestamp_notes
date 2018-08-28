@@ -23,7 +23,6 @@ export default class Interview extends React.Component<any, InterviewState> {
     }
 
     render() {
-        const notes = this.state.notes;
         return (<React.Fragment>
             <div className="row">
                 <NoteTaker onSubmit={note => this.handleNoteSubmit(note)} />

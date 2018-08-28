@@ -38,7 +38,7 @@ export default class NoteTaker extends React.Component<NoteTakerProps, NoteTaker
         return (
             <form id="notes-form" onSubmit={e => this.handleSubmit(e)}>
                 <div className="form-group">
-                    <input id='note-text'
+                    <input name='note-text'
                         className="form-control" type="text"
                         placeholder="Start with '+', '-', '~' for pros/cons/mehs, or '=' for overall summary."
                         onChange={e => this.handleChange(e)}

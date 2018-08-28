@@ -22,20 +22,20 @@ export default class InterviewTimeline extends React.Component<InterviewNotesPro
         const notes = this.props.notes || [];
         return (
             <div className="well top-padded">
-                <ul className="unf-list" id="overview">
+                <ul className="unf-list">
                     {this.renderFilteredNotes(NoteType.OVERALL)}
                 </ul>
-                <ul className="unf-list" id="pros">
+                <ul className="unf-list">
                     {this.renderFilteredNotes(NoteType.PRO)}
                 </ul>
-                <ul className="unf-list" id="mehs">
+                <ul className="unf-list">
                     {this.renderFilteredNotes(NoteType.MEH)}
                 </ul>
-                <ul className="unf-list" id="cons">
+                <ul className="unf-list">
                     {this.renderFilteredNotes(NoteType.CON)}
                 </ul>
 
-                <ul className="unf-list" id="notes">
+                <ul className="unf-list">
                     {notes.map(note => (
                         <li key={note.timestamp.getTime()}>
                             <Entry note={note} />
