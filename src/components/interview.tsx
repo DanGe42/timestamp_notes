@@ -15,13 +15,20 @@ interface Note {
 }
 
 interface EntryProps {
-    timestamp: Date;
-    text: string;
+    note: Note;
 }
 
-const Entry = (props: EntryProps) => (<React.Fragment>
-    <strong>{props.timestamp.toLocaleTimeString()}</strong> - {props.text}
-</React.Fragment>);
+const Entry = (props: EntryProps) => {
+    const { timestamp, type, text } = props.note;
+    let renderedText = <React.Fragment>{text}</React.Fragment>;
+    if (type !== NoteType.NORMAL) {
+        renderedText = <em>[{type}] {renderedText}</em>;
+    }
+
+    return (<React.Fragment>
+        <strong>{timestamp.toLocaleTimeString()}</strong> - {renderedText}
+    </React.Fragment>);
+};
 
 interface SummaryEntryProps {
     type: NoteType;
@@ -67,7 +74,7 @@ class InterviewNotes extends React.Component<InterviewNotesProps, {}> {
                 <ul className="unf-list" id="notes">
                     {notes.map(note => (
                         <li key={note.timestamp.getTime()}>
-                            <Entry timestamp={note.timestamp} text={note.text} />
+                            <Entry note={note} />
                         </li>
                     ))}
                 </ul>
