@@ -43,7 +43,7 @@ interface InterviewNotesProps {
     notes: Note[];
 }
 
-class InterviewNotes extends React.Component<InterviewNotesProps, {}> {
+class InterviewTimeline extends React.Component<InterviewNotesProps, {}> {
     renderFilteredNotes(noteType: NoteType): React.ReactElement<any>[] {
         const notes = this.props.notes;
         return notes.filter(note => note.type === noteType)
@@ -166,7 +166,7 @@ export default class Interview extends React.Component<any, InterviewState> {
                 <NoteTaker onSubmit={note => this.handleNoteSubmit(note)} />
             </div>
             <div className="row">
-                <InterviewNotes notes={this.state.notes}/>
+                <InterviewTimeline notes={this.state.notes}/>
             </div>
         </React.Fragment>);
     }
