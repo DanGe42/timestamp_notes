@@ -11,11 +11,12 @@ export default class InterviewTimeline extends React.Component<InterviewNotesPro
     renderFilteredNotes(noteType: NoteType): React.ReactElement<any>[] {
         const notes = this.props.notes;
         return notes.filter(note => note.type === noteType)
-            .map(note => (
-                <li key={note.timestamp.getTime()}>
-                    <SummaryEntry type={note.type} text={note.text} />
-                </li>
-            ));
+            .map(note =>
+                <SummaryEntry
+                    key={note.timestamp.getTime()}
+                    type={note.type}
+                    text={note.text} />
+            );
     }
 
     render() {
@@ -36,11 +37,9 @@ export default class InterviewTimeline extends React.Component<InterviewNotesPro
                 </ul>
 
                 <ul className="unf-list">
-                    {notes.map(note => (
-                        <li key={note.timestamp.getTime()}>
-                            <Entry note={note} />
-                        </li>
-                    ))}
+                    {notes.map(note =>
+                        <Entry key={note.timestamp.getTime()} note={note} />
+                    )}
                 </ul>
             </div>
         );

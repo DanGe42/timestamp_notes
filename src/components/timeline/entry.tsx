@@ -13,9 +13,9 @@ export const Entry = (props: EntryProps) => {
         renderedText = <em>[{type}] {renderedText}</em>;
     }
 
-    return (<React.Fragment>
+    return (<li>
         <strong>{timestamp.toLocaleTimeString()}</strong> - {renderedText}
-    </React.Fragment>);
+    </li>);
 };
 
 interface SummaryEntryProps {
@@ -24,5 +24,5 @@ interface SummaryEntryProps {
 }
 
 export const SummaryEntry = (props: SummaryEntryProps) => (
-    <React.Fragment>({props.type}) {props.text}</React.Fragment>
+    <li>({props.type}) {props.text}</li>
 )
