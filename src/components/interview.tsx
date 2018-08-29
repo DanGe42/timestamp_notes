@@ -3,16 +3,21 @@ import * as React from 'react';
 import { Note } from '../model';
 import NoteTaker from './note-taker';
 import InterviewTimeline from './timeline';
+import NotesStorage from '../notes-storage';
+
+interface InterviewProps {
+    notesStorage: NotesStorage;
+}
 
 interface InterviewState {
     notes: Note[]
 }
 
-export default class Interview extends React.Component<any, InterviewState> {
-    constructor(props: any) {
+export default class Interview extends React.Component<InterviewProps, InterviewState> {
+    constructor(props: InterviewProps) {
         super(props);
         this.state = {
-            notes: []
+            notes: props.notesStorage.currentNotes
         };
 
         this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
@@ -21,7 +26,9 @@ export default class Interview extends React.Component<any, InterviewState> {
     handleNoteSubmit(note: Note) {
         const notes = this.state.notes.slice();
         notes.push(note);
+
         this.setState({ notes });
+        this.props.notesStorage.currentNotes = notes;
     }
 
     handleClearButtonClick() {
