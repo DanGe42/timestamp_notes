@@ -22,6 +22,7 @@ export default class Interview extends React.Component<InterviewProps, Interview
         };
 
         this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
+        this.handleNoteSubmit = this.handleNoteSubmit.bind(this);
     }
 
     handleNoteSubmit(note: Note) {
@@ -40,21 +41,23 @@ export default class Interview extends React.Component<InterviewProps, Interview
     }
 
     render() {
-        return (<React.Fragment>
-            <div className="row">
-                <NoteTaker onSubmit={(note) => this.handleNoteSubmit(note)} />
-            </div>
-            <div className="row">
-                <InterviewTimeline notes={this.state.notes}/>
-            </div>
-
-            <div className="row">
-                <div className="pull-right">
-                    <button className="btn btn-danger"
-                        onClick={this.handleClearButtonClick}
-                    >Clear Notes</button>
+        return (
+            <React.Fragment>
+                <div className="row">
+                    <NoteTaker onSubmit={this.handleNoteSubmit} />
                 </div>
-            </div>
-        </React.Fragment>);
+                <div className="row">
+                    <InterviewTimeline notes={this.state.notes} />
+                </div>
+
+                <div className="row">
+                    <div className="pull-right">
+                        <button className="btn btn-danger"
+                            onClick={this.handleClearButtonClick}
+                        >Clear Notes</button>
+                    </div>
+                </div>
+            </React.Fragment>
+        );
     }
 }

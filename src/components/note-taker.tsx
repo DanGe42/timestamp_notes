@@ -20,6 +20,9 @@ export default class NoteTaker extends React.Component<NoteTakerProps, NoteTaker
         this.state = {
             textValue: "",
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -40,12 +43,12 @@ export default class NoteTaker extends React.Component<NoteTakerProps, NoteTaker
 
     render() {
         return (
-            <form id="notes-form" onSubmit={(e) => this.handleSubmit(e)}>
+            <form id="notes-form" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <input name="note-text"
                         className="form-control" type="text"
                         placeholder="Start with '+', '-', '~' for pros/cons/mehs, or '=' for overall summary."
-                        onChange={(e) => this.handleChange(e)}
+                        onChange={this.handleChange}
                         value={this.state.textValue}
                     />
                 </div>
