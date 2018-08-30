@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "description": "Timestamp notes, ideal for interviewing. Based off https://github.com/LindsayV/timestamp_notes.",
   "scripts": {
-    "build": "webpack --conig webpack.prod.js",
-    "start": "webpack-dev-server --config webpack.dev.js"
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "deploy:gh-pages": "script/deploy"
   },
   "main": "index.js",
   "repository": "git@github.com:DanGe42/timestamp_notes.git",

@@ -1,0 +1,62 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+_bold="$(tput bold)"
+_red="$(tput setaf 1)"
+_green="$(tput setaf 2)"
+_reset="$(tput sgr0)"
+
+echo_error() {
+    echo "${_bold}${_red}$*${_reset}" 2> /dev/null
+}
+
+echo_success() {
+    echo "${_green}$*${_reset}" 2> /dev/null
+}
+
+# Do not continue if the working directory is dirty or has untracked files
+if [ -n "$(git status --porcelain)" ]
+then
+    echo_error "Working directory must be clean to publish!"
+    exit 1
+fi
+
+# We're going to use the SHA for the commit message
+sha="$(git rev-parse --short HEAD)"
+
+# Ensure that we are in the base directory
+cd "$(dirname "$0")"/..
+
+# Clean up build output directory to ensure a clean start. Development and
+# production setups output to the same directory.
+echo "Cleaning the output directory before building" 2> /dev/null
+rm -rf dist
+
+# Make production build. 'dist' directory should have compiled JS and CSS.
+npm run build
+
+# Hang onto the index.html file. The 'dist' directory is gitignored, so
+# it'll survive when we switch to a different branch.
+cp index.html dist/
+
+echo "Switching git branch to 'gh-pages'"
+git checkout -q gh-pages
+
+timestamp="$(date -u)"
+echo "Build SHA: ${_bold}${sha}${_reset}" 2> /dev/null
+echo "Build time: ${_bold}${timestamp}${_reset}" 2> /dev/null
+
+# Restore our index.html file
+mv dist/index.html ./
+
+# Explicitly whitelist the files we want to commit
+git add index.html dist/
+
+cat <<EOF | git commit --file=-
+Publish ${sha}
+
+Build time: ${timestamp}
+EOF
