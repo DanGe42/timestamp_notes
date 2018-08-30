@@ -1,16 +1,16 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Note } from '../model';
-import NoteTaker from './note-taker';
-import InterviewTimeline from './timeline';
-import NotesStorage from '../notes-storage';
+import { Note } from "../model";
+import NotesStorage from "../notes-storage";
+import NoteTaker from "./note-taker";
+import InterviewTimeline from "./timeline";
 
 interface InterviewProps {
     notesStorage: NotesStorage;
 }
 
 interface InterviewState {
-    notes: Note[]
+    notes: Note[];
 }
 
 export default class Interview extends React.Component<InterviewProps, InterviewState> {
@@ -18,7 +18,7 @@ export default class Interview extends React.Component<InterviewProps, Interview
         super(props);
         this.state = {
             // Restore timeline from NotesStorage
-            notes: props.notesStorage.currentNotes
+            notes: props.notesStorage.currentNotes,
         };
 
         this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
@@ -33,7 +33,7 @@ export default class Interview extends React.Component<InterviewProps, Interview
     }
 
     handleClearButtonClick() {
-        let response = confirm("Are you sure you want to clear your notes?");
+        const response = confirm("Are you sure you want to clear your notes?");
         if (response) {
             this.setState({ notes: [] });
         }
@@ -42,7 +42,7 @@ export default class Interview extends React.Component<InterviewProps, Interview
     render() {
         return (<React.Fragment>
             <div className="row">
-                <NoteTaker onSubmit={note => this.handleNoteSubmit(note)} />
+                <NoteTaker onSubmit={(note) => this.handleNoteSubmit(note)} />
             </div>
             <div className="row">
                 <InterviewTimeline notes={this.state.notes}/>

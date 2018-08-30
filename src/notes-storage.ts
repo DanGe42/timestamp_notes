@@ -1,4 +1,4 @@
-import { Note, NoteType } from './model';
+import { Note, NoteType } from "./model";
 
 interface JSONNote {
     timestamp: string;
@@ -20,7 +20,7 @@ export default class NotesStorage {
     }
 
     get currentNotes(): Note[] {
-        const currentNotes = this.storage.getItem('currentNotes');
+        const currentNotes = this.storage.getItem("currentNotes");
         if (!currentNotes) {
             return [];
         }
@@ -30,25 +30,26 @@ export default class NotesStorage {
         // generally won't have enough information to deserialize our JSON back
         // into objects of their original types. Thus, we need to make some
         // adjustments.
-        return rawNotes.map(rawNote =>
+        return rawNotes.map((rawNote) =>
             Object.assign(rawNote, {
                 timestamp: new Date(rawNote.timestamp),
-                type: this.stringToNoteType(rawNote.type)
+                type: this.stringToNoteType(rawNote.type),
             }));
     }
 
     set currentNotes(notes: Note[]) {
-        this.storage.setItem('currentNotes', JSON.stringify(notes || []));
+        this.storage.setItem("currentNotes", JSON.stringify(notes || []));
     }
 
     private stringToNoteType(type: string): NoteType {
         switch (type) {
-            case '=': return NoteType.OVERALL;
-            case '+': return NoteType.PRO;
-            case '-': return NoteType.CON;
-            case '~': return NoteType.MEH;
-            case '': return NoteType.NORMAL;
+            case "=": return NoteType.OVERALL;
+            case "+": return NoteType.PRO;
+            case "-": return NoteType.CON;
+            case "~": return NoteType.MEH;
+            case "": return NoteType.NORMAL;
             default:
+                /* tslint:disable:no-console */
                 console.warn(`Found inappropriate NoteType "${type}". Returning NORMAL.`);
                 return NoteType.NORMAL;
         }

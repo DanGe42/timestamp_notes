@@ -1,9 +1,9 @@
 export enum NoteType {
-    NORMAL = '',
-    PRO = '+',
-    CON = '-',
-    MEH = '~',
-    OVERALL = '=',
+    NORMAL = "",
+    PRO = "+",
+    CON = "-",
+    MEH = "~",
+    OVERALL = "=",
 }
 
 export interface Note {

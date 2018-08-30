@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Note, NoteType } from '../model';
+import { Note, NoteType } from "../model";
 
 interface NoteTakerProps {
     onSubmit: (note: Note) => any;
@@ -18,7 +18,7 @@ export default class NoteTaker extends React.Component<NoteTakerProps, NoteTaker
     constructor(props: NoteTakerProps) {
         super(props);
         this.state = {
-            textValue: ''
+            textValue: "",
         };
     }
 
@@ -31,7 +31,7 @@ export default class NoteTaker extends React.Component<NoteTakerProps, NoteTaker
 
         this.props.onSubmit(note);
         // Clear the input after submission
-        this.setState({ textValue: '' });
+        this.setState({ textValue: "" });
     }
 
     handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -40,12 +40,12 @@ export default class NoteTaker extends React.Component<NoteTakerProps, NoteTaker
 
     render() {
         return (
-            <form id="notes-form" onSubmit={e => this.handleSubmit(e)}>
+            <form id="notes-form" onSubmit={(e) => this.handleSubmit(e)}>
                 <div className="form-group">
-                    <input name='note-text'
+                    <input name="note-text"
                         className="form-control" type="text"
                         placeholder="Start with '+', '-', '~' for pros/cons/mehs, or '=' for overall summary."
-                        onChange={e => this.handleChange(e)}
+                        onChange={(e) => this.handleChange(e)}
                         value={this.state.textValue}
                     />
                 </div>
@@ -55,10 +55,10 @@ export default class NoteTaker extends React.Component<NoteTakerProps, NoteTaker
 
     private inferType(note: string): [NoteType, string] {
         switch (note[0]) {
-            case '+': return [NoteType.PRO, note.substr(1)];
-            case '-': return [NoteType.CON, note.substr(1)];
-            case '~': return [NoteType.MEH, note.substr(1)];
-            case '=': return [NoteType.OVERALL, note.substr(1)];
+            case "+": return [NoteType.PRO, note.substr(1)];
+            case "-": return [NoteType.CON, note.substr(1)];
+            case "~": return [NoteType.MEH, note.substr(1)];
+            case "=": return [NoteType.OVERALL, note.substr(1)];
             default: return [NoteType.NORMAL, note];
         }
     }
