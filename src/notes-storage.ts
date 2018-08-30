@@ -6,6 +6,12 @@ interface JSONNote {
     text: string;
 }
 
+/**
+ * NotesStorage is a layer over native browser local storage APIs. NotesStorage
+ * persists the current interview timeline. This ensures that an accidental
+ * page unload/reload of any sort won't cause us to lose our current interview
+ * notes.
+ */
 export default class NotesStorage {
     storage: Storage;
 
@@ -20,6 +26,10 @@ export default class NotesStorage {
         }
 
         const rawNotes: JSONNote[] = JSON.parse(currentNotes);
+        // JSON.stringify will serialize Date objects as strings, and JSON.parse
+        // generally won't have enough information to deserialize our JSON back
+        // into objects of their original types. Thus, we need to make some
+        // adjustments.
         return rawNotes.map(rawNote =>
             Object.assign(rawNote, {
                 timestamp: new Date(rawNote.timestamp),

@@ -10,6 +10,10 @@ interface NoteTakerState {
     textValue: string;
 }
 
+/**
+ * NoteTaker handles input submission. It does two things pretty well: emitting
+ * Entry objects and clearing itself.
+ */
 export default class NoteTaker extends React.Component<NoteTakerProps, NoteTakerState> {
     constructor(props: NoteTakerProps) {
         super(props);

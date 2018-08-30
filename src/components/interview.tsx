@@ -17,6 +17,7 @@ export default class Interview extends React.Component<InterviewProps, Interview
     constructor(props: InterviewProps) {
         super(props);
         this.state = {
+            // Restore timeline from NotesStorage
             notes: props.notesStorage.currentNotes
         };
 
@@ -24,10 +25,10 @@ export default class Interview extends React.Component<InterviewProps, Interview
     }
 
     handleNoteSubmit(note: Note) {
-        const notes = this.state.notes.slice();
-        notes.push(note);
+        const notes = [...this.state.notes, note];
 
         this.setState({ notes });
+        // Store the timeline for safe-keeping
         this.props.notesStorage.currentNotes = notes;
     }
 
