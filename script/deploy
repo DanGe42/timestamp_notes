@@ -25,7 +25,7 @@ then
 fi
 
 # We're going to use the SHA for the commit message
-sha="$(git rev-parse --short HEAD)"
+sha="$(git rev-parse HEAD)"
 
 # Ensure that we are in the base directory
 cd "$(dirname "$0")"/..
