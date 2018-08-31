@@ -38,12 +38,18 @@ rm -rf dist
 # Make production build. 'dist' directory should have compiled JS and CSS.
 npm run build
 
-# Hang onto the index.html file. The 'dist' directory is gitignored, so
-# it'll survive when we switch to a different branch.
+# Hang onto the index.html file.
 cp index.html dist/
+
+# Change this to .dist to ensure that it's not overwritten on checkout.
+mv dist .dist
 
 echo "Switching git branch to 'gh-pages'"
 git checkout -q gh-pages
+
+# Overwrite the older dist folder.
+rm -rf dist
+mv .dist dist
 
 timestamp="$(date -u)"
 echo "Build SHA: ${_bold}${sha}${_reset}" 2> /dev/null
