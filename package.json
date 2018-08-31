@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
+    "@types/react-textarea-autosize": "^4.3.3",
     "awesome-typescript-loader": "^5.2.0",
     "css-loader": "^1.0.0",
     "mini-css-extract-plugin": "^0.4.2",
@@ -33,6 +34,7 @@
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-scripts": "^1.1.5"
+    "react-scripts": "^1.1.5",
+    "react-textarea-autosize": "^7.0.4"
   }
 }
